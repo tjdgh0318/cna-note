@@ -66,3 +66,30 @@ configmap 설치 (yaml)
 
 - deployment.yml
 ![image](https://user-images.githubusercontent.com/69283682/97563694-c15b5600-1a26-11eb-9810-539fe289d2fa.png)
+
+- PaymentService.java
+![image](https://user-images.githubusercontent.com/69283682/97563880-11d2b380-1a27-11eb-823b-5d689377c321.png)
+
+8. HPA
+siege 로그인
+kubectl exec -it siege --container siege -- /bin/bash
+
+부하발생
+???
+capture하다 azure acr 날라감;;
+
+9. liveness
+???
+capture하다 azure acr 날라감;;
+
+10. Polyglot
+polyglot persitency
+- order 등 h2 사용
+![image](https://user-images.githubusercontent.com/69283682/97567886-311f1000-1a2a-11eb-9878-3b854f9b09e0.png)
+
+- delivery는 hsql
+![image](https://user-images.githubusercontent.com/69283682/97567350-0e8cf700-1a2a-11eb-92d7-7f6ee3110255.png)
+
+11. 무정지
+???
+capture하다 azure acr 날라감;;
