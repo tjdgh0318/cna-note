@@ -75,8 +75,20 @@ siege 로그인
 kubectl exec -it siege --container siege -- /bin/bash
 
 부하발생
-???
-capture하다 azure acr 날라감;;
+siege -c1 -t10S -r5 -v --content-type "application/json" 'http://gateway:8080/orders POST {"branchId":"1","sauceId":"1", "qty":10, "price":10000}'
+![image](https://user-images.githubusercontent.com/69283682/97790539-b3ffc080-1c0c-11eb-84a3-fb6bae9e0d1a.png)
+
+AutoScale
+kubectl autoscale deploy payment --min=1 --max=10 --cpu-percent=15
+
+![image](https://user-images.githubusercontent.com/69283682/97790615-50c25e00-1c0d-11eb-85fe-9ffb20600c71.png)
+
+- 체크 (변화 없네??)
+![image](https://user-images.githubusercontent.com/69283682/97790782-e4485e80-1c0e-11eb-8608-8fe2f883558f.png)
+
+부하발생
+![image](https://user-images.githubusercontent.com/69283682/97790782-e4485e80-1c0e-11eb-8608-8fe2f883558f.png)
+
 
 9. liveness
 ???
