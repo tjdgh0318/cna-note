@@ -76,7 +76,7 @@ kubectl exec -it siege --container siege -- /bin/bash
 
 부하발생
 siege -c1 -t10S -r5 -v --content-type "application/json" 'http://gateway:8080/orders POST {"branchId":"1","sauceId":"1", "qty":10, "price":10000}'
-![image](https://user-images.githubusercontent.com/69283682/97790539-b3ffc080-1c0c-11eb-84a3-fb6bae9e0d1a.png)
+![image](https://user-images.githubusercontent.com/69283682/97793969-c42c9580-1c36-11eb-9767-c7f04eabdd6e.png)
 
 AutoScale
 kubectl autoscale deploy payment --min=1 --max=10 --cpu-percent=15
