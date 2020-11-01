@@ -70,6 +70,10 @@ kubectl 설정
 
 link: https://kubernetes.io/ko/docs/concepts/configuration/configmap/
 
+Feign Client : Netflix에서 개발된 Http client binder
+
+참조 link: https://woowabros.github.io/experience/2019/05/29/feign.html
+
 configmap 설치 (yaml)
 ![image](https://user-images.githubusercontent.com/69283682/97563002-d1266a80-1a25-11eb-8117-80c9c1390211.png)
 
