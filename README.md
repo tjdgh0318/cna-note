@@ -86,7 +86,7 @@ configmap 설치 (yaml)
 - PaymentService.java
 ![image](https://user-images.githubusercontent.com/69283682/97563880-11d2b380-1a27-11eb-823b-5d689377c321.png)
 
-8. HPA
+8. HPA (Horizontal Pod Autoscaler)
 siege 로그인
 kubectl exec -it siege --container siege -- /bin/bash
 
