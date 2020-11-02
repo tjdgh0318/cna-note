@@ -116,8 +116,8 @@ kubectl autoscale deploy payment --min=1 --max=10 --cpu-percent=15
 
 
 9. liveness
-???
-capture하다 azure acr 날라감;;
+delivery > deployment.yml 원본
+![image](https://user-images.githubusercontent.com/69283682/97844680-cbcf6580-1d2e-11eb-8743-3290db4f4bce.png)
 
 10. Polyglot
 polyglot persitency
