@@ -105,6 +105,9 @@ kubectl autoscale deploy payment --min=1 --max=10 --cpu-percent=15
 부하발생
 ![image](https://user-images.githubusercontent.com/69283682/97790782-e4485e80-1c0e-11eb-8608-8fe2f883558f.png)
 
+로그 후반
+![image](https://user-images.githubusercontent.com/69283682/97844119-ce7d8b00-1d2d-11eb-9cff-02566cab726b.png)
+
 부하발생 시 체크
 ![image](https://user-images.githubusercontent.com/69283682/97843781-3b445580-1d2d-11eb-93bc-c0e1ad1e9af0.png)
 
