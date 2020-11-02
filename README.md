@@ -120,6 +120,9 @@ kubectl autoscale deploy payment --min=1 --max=10 --cpu-percent=15
 delivery > deployment.yml 원본
 ![image](https://user-images.githubusercontent.com/69283682/97844680-cbcf6580-1d2e-11eb-8743-3290db4f4bce.png)
 
+liveness 모니터링
+![image](https://user-images.githubusercontent.com/69283682/97845655-2e753100-1d30-11eb-8634-3b56cda3eb5e.png)ㅣ
+
 10. Polyglot
 polyglot persitency
 - order 등 h2 사용
