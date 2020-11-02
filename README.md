@@ -114,6 +114,7 @@ kubectl autoscale deploy payment --min=1 --max=10 --cpu-percent=15
 부하발생 시 체크
 ![image](https://user-images.githubusercontent.com/69283682/97843781-3b445580-1d2d-11eb-93bc-c0e1ad1e9af0.png)
 
+![image](https://user-images.githubusercontent.com/69283682/97845029-5dd76e00-1d2f-11eb-8a3d-3f2abd77eb3d.png)
 
 9. liveness
 delivery > deployment.yml 원본
