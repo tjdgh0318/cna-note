@@ -174,3 +174,7 @@ seige 부하 결과 100% 미만
 readiness probe 설정
 
 동일 시나리오 재배포
+
+
+주석. 배포. 부하테스트
+![image](https://user-images.githubusercontent.com/69283682/98051489-5de28580-1e77-11eb-9940-01ebbc2d8bc5.png)
