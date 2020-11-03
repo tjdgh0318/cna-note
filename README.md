@@ -178,6 +178,7 @@ readiness probe 설정
 
 주석. 배포. 부하테스트
 ![image](https://user-images.githubusercontent.com/69283682/98051489-5de28580-1e77-11eb-9940-01ebbc2d8bc5.png)
+![image](https://user-images.githubusercontent.com/69283682/98053385-cd5a7400-1e7b-11eb-9900-8c4ddbdd2e56.png)
 
 readiness 부하테스트
 ![image](https://user-images.githubusercontent.com/69283682/98052156-cc741300-1e78-11eb-816b-3749042a4dd7.png)
