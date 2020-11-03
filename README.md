@@ -137,6 +137,7 @@ kubectl delete hpa payment
 
 hpa 제거 확인
 kubectl get hpa
+![image](https://user-images.githubusercontent.com/69283682/97957608-eb2dc780-1dee-11eb-9174-748bae1479a6.png)
 
 부하발생
 siege -c1 -t120S -r5 -v --content-type "application/json" 'http://gateway:8080/orders POST {"brancdId":"1","sauceId":"1","qty":10,"price":10000}'
