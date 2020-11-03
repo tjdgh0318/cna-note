@@ -137,5 +137,4 @@ siege -c1 -t120S -r5 -v --content-type "application/json" 'http://gateway:8080/o
 ![image](https://user-images.githubusercontent.com/69283682/97956128-3940cc00-1deb-11eb-935f-cb5ffaae8e0b.png)
 
 readiness 설정
-
-
+![image](https://user-images.githubusercontent.com/69283682/97956520-3e524b00-1dec-11eb-8df4-455752de77b6.png)
