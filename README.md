@@ -4,6 +4,8 @@
 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity로 선언
 ![image](https://user-images.githubusercontent.com/69283682/97958414-79567d80-1df0-11eb-8740-037789d8b552.png)
 
+Entity Pattern 과 Repository Pattern 을 적용하여 JPA 를 통하여 다양한 데이터소스 유형 (RDB or NoSQL) 에 대한 별도의 처리가 없도록 데이터 접근 어댑터를 자동 생성하기 위하여 Spring Data REST 의 RestRepository 를 적용
+
 
 1. 동기식 호출
 order > payment 동기식 호출 구현
