@@ -161,3 +161,16 @@ siege -c1 -t120S -r5 -v --content-type "application/json" 'http://gateway:8080/o
 
 readiness 설정
 ![image](https://user-images.githubusercontent.com/69283682/97956520-3e524b00-1dec-11eb-8df4-455752de77b6.png)
+
+
+autoscaler나 CB 설정 제거
+seige로 배포작업 직전에 워크로드 모니터링
+
+새 버전으로 배포 시작
+
+seige 부하 결과 100% 미만
+![image](https://user-images.githubusercontent.com/69283682/97962714-16b5af80-1df9-11eb-8303-de1fdc66416c.png)
+
+readiness probe 설정
+
+동일 시나리오 재배포
