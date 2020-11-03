@@ -10,7 +10,7 @@ Entity Pattern 과 Repository Pattern 을 적용하여 JPA 를 통하여 다양�
 
 1. 동기식 호출
 order > payment 동기식 호출 구현
-
+주문을 받은 직후(@PostPersist) 결제를 요청하도록 처리
 ![image](https://user-images.githubusercontent.com/69283682/97558818-fadc9300-1a1f-11eb-8585-2bb964977187.png)
 
 동기식 설정에 따라 payment 서비스 중단시 500 에러 발생
