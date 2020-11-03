@@ -132,5 +132,13 @@ polyglot persitency
 ![image](https://user-images.githubusercontent.com/69283682/97567350-0e8cf700-1a2a-11eb-92d7-7f6ee3110255.png)
 
 11. 무정지
-???
-capture하다 azure acr 날라감;;
+hpa 상태 확인
+![image](https://user-images.githubusercontent.com/69283682/97937744-d6d3d580-1dc2-11eb-8d6b-45b84ac5e8b9.png)
+
+hpa 제거
+![image](https://user-images.githubusercontent.com/69283682/97937807-0d115500-1dc3-11eb-86ae-165a90d5521f.png)
+
+hpa 제거 후 부하발생
+siege -c1 -t60S -r5 -v --content-type "application/json" 'http://gateway:8080/orders POST {"brancdId":"1","sauceId":"1","qty":10,"price":10000}'
+![image](https://user-images.githubusercontent.com/69283682/97938201-2961c180-1dc4-11eb-84bb-6b10cbfa8f98.png)
+
