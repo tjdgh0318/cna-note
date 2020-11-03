@@ -22,7 +22,7 @@ payment 서비스 정상 작동시 정상 결과 출력
 2. 비동기 호출
 order > delivery비동기식 구현
 
-kafka에서 Delivery 상태 업데이트
+Delivery  서비스에서는 결제 승인 이벤트에 대해서 이를 수신하여 자신의 정책을 처리하도록 PolicyHandler 구현
 ![image](https://user-images.githubusercontent.com/69283682/97560098-9c181900-1a21-11eb-8eca-1d71886c5f13.png)
 
 delivery 서비스 down
