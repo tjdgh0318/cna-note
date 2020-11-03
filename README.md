@@ -21,6 +21,8 @@ payment 서비스 정상 작동시 정상 결과 출력
 
 2. 비동기 호출
 order > delivery비동기식 구현
+결제가 이루어진 후에 delivery 시스템으로 이를 알려주는 행위는 비 동기식으로 처리하여 시스템이 주문 처리를 위하여 결제 주문이 블로킹 되지 않도록 처리한다
+
 Payment 서비스에서는 결제 이력에 기록을 남긴 후 곧바로 결제승인이 되었다는 에빈트를 카프카 송출
 ![image](https://user-images.githubusercontent.com/69283682/97959189-24b40200-1df2-11eb-8fb4-57b6fdb9ac86.png)
 
