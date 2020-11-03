@@ -111,6 +111,11 @@ configmap 설치 (yaml)
 ![image](https://user-images.githubusercontent.com/69283682/97563880-11d2b380-1a27-11eb-823b-5d689377c321.png)
 
 8. HPA (Horizontal Pod Autoscaler)
+AutoScale
+결제서비스에 대한 replica 를 동적으로 늘려주도록 설정(CPU 사용량이 15프로를 넘어서면 replica 를 10개까지 증가)
+kubectl autoscale deploy payment --min=1 --max=10 --cpu-percent=15
+![image](https://user-images.githubusercontent.com/69283682/97790615-50c25e00-1c0d-11eb-85fe-9ffb20600c71.png)
+
 siege 로그인
 kubectl exec -it siege --container siege -- /bin/bash
 
@@ -118,26 +123,13 @@ kubectl exec -it siege --container siege -- /bin/bash
 siege -c1 -t10S -r5 -v --content-type "application/json" 'http://gateway:8080/orders POST {"branchId":"1","sauceId":"1", "qty":10, "price":10000}'
 ![image](https://user-images.githubusercontent.com/69283682/97793969-c42c9580-1c36-11eb-9767-c7f04eabdd6e.png)
 
-AutoScale
-kubectl autoscale deploy payment --min=1 --max=10 --cpu-percent=15
-
-![image](https://user-images.githubusercontent.com/69283682/97790615-50c25e00-1c0d-11eb-85fe-9ffb20600c71.png)
-
-- 체크 (변화 없네??)
-![image](https://user-images.githubusercontent.com/69283682/97790782-e4485e80-1c0e-11eb-8608-8fe2f883558f.png)
-
-부하발생
-![image](https://user-images.githubusercontent.com/69283682/97790782-e4485e80-1c0e-11eb-8608-8fe2f883558f.png)
-
 로그 시작
 ![image](https://user-images.githubusercontent.com/69283682/97844200-f40a9480-1d2d-11eb-84a9-da09333bf375.png)
 
 로그 후반
 ![image](https://user-images.githubusercontent.com/69283682/97844119-ce7d8b00-1d2d-11eb-9cff-02566cab726b.png)
 
-부하발생 시 체크
-![image](https://user-images.githubusercontent.com/69283682/97843781-3b445580-1d2d-11eb-93bc-c0e1ad1e9af0.png)
-
+부하발생 체크 - 오토스케일이 어떻게 되고 있는지 모니터링
 ![image](https://user-images.githubusercontent.com/69283682/97845029-5dd76e00-1d2f-11eb-8a3d-3f2abd77eb3d.png)
 
 9. liveness
