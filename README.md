@@ -178,3 +178,10 @@ readiness probe 설정
 
 주석. 배포. 부하테스트
 ![image](https://user-images.githubusercontent.com/69283682/98051489-5de28580-1e77-11eb-9940-01ebbc2d8bc5.png)
+
+readiness 부하테스트
+![image](https://user-images.githubusercontent.com/69283682/98052156-cc741300-1e78-11eb-816b-3749042a4dd7.png)
+
+readiness 부하테스트
+siege -c1 -t2M -r1 -v --content-type "application/json" 'http://gateway:8080/orders POST {"brancdId":"1","sauceId":"1","qty":10,"price":10000}'
+![image](https://user-images.githubusercontent.com/69283682/98052416-85d2e880-1e79-11eb-9634-788f04b21fe4.png)
