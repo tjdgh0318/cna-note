@@ -1,7 +1,12 @@
 # cna-note
 
+0. DDD 의 적용
+각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity로 선언
+
+
 1. 동기식 호출
-order > 결제는 동기식 호출 구현
+order > payment 동기식 호출 구현
+
 ![image](https://user-images.githubusercontent.com/69283682/97558818-fadc9300-1a1f-11eb-8585-2bb964977187.png)
 
 동기식 설정에 따라 payment 서비스 중단시 500 에러 발생
