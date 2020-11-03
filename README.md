@@ -147,7 +147,7 @@ polyglot persitency
 - delivery는 hsql
 ![image](https://user-images.githubusercontent.com/69283682/97567350-0e8cf700-1a2a-11eb-92d7-7f6ee3110255.png)
 
-11. 무정지
+11. 무정지 재배포
 hpa 제거
 kubectl delete hpa payment
 
