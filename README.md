@@ -132,6 +132,12 @@ polyglot persitency
 ![image](https://user-images.githubusercontent.com/69283682/97567350-0e8cf700-1a2a-11eb-92d7-7f6ee3110255.png)
 
 11. 무정지
+hpa 제거
+kubectl delete hpa payment
+
+hpa 제거 확인
+kubectl get hpa
+
 부하발생
 siege -c1 -t120S -r5 -v --content-type "application/json" 'http://gateway:8080/orders POST {"brancdId":"1","sauceId":"1","qty":10,"price":10000}'
 ![image](https://user-images.githubusercontent.com/69283682/97956128-3940cc00-1deb-11eb-935f-cb5ffaae8e0b.png)
