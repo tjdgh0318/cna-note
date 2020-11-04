@@ -3,14 +3,17 @@
 # 1. DDD 의 적용
 
 - 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity로 선언 (예: Order)
+
 ![image](https://user-images.githubusercontent.com/69283682/97958414-79567d80-1df0-11eb-8740-037789d8b552.png)
 
 - Entity Pattern 과 Repository Pattern 을 적용하여 JPA 를 통하여 다양한 데이터소스 유형 (RDB or NoSQL) 에 대한 별도의 처리가 없도록 데이터 접근 어댑터를 자동 생성하기 위하여 Spring Data REST 의 RestRepository 를 적용
+
 ![image](https://user-images.githubusercontent.com/69283682/97958566-cc303500-1df0-11eb-8f79-303af9e2ddec.png)
 
 - 적용 후 REST API 테스트
+```
 http localhost:8084/orders branchId=1 sauceId=1 qty=10 price=10000
-
+```
 # 2. 동기식 호출
 
 - 주문 → 결제 (order → payment) 간 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리
