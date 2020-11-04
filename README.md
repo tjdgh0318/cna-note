@@ -227,14 +227,10 @@ kubectl get hpa
 
 ![image](https://user-images.githubusercontent.com/69283682/97957608-eb2dc780-1dee-11eb-9174-748bae1479a6.png)
 
-- readiness 설정
-
-![image](https://user-images.githubusercontent.com/69283682/97956520-3e524b00-1dec-11eb-8df4-455752de77b6.png)
-
 - 부하발생
 
 ```
-siege -c1 -t120S -r5 -v --content-type "application/json" 'http://gateway:8080/orders POST {"brancdId":"1","sauceId":"1","qty":10,"price":10000}'
+siege -c30 -t2M -r5 -v --content-type application/json http://gateway:8080/orders POST {"brancdId":"1","sauceId":"1","qty":10,"price":10000}
 ```
 
 ![image](https://user-images.githubusercontent.com/69283682/97956128-3940cc00-1deb-11eb-935f-cb5ffaae8e0b.png)
@@ -243,11 +239,15 @@ siege -c1 -t120S -r5 -v --content-type "application/json" 'http://gateway:8080/o
 
 - seige 부하 결과 100% 미만
 
+![image](https://user-images.githubusercontent.com/69283682/98064621-0e5f8200-1e96-11eb-850e-70b19d006263.png)
+
 ![image](https://user-images.githubusercontent.com/69283682/98064415-9beea200-1e95-11eb-8620-bee24d3372b3.png)
 
 ![image](https://user-images.githubusercontent.com/69283682/97962714-16b5af80-1df9-11eb-8303-de1fdc66416c.png)
 
 - readiness probe 설정
+
+![image](https://user-images.githubusercontent.com/69283682/97956520-3e524b00-1dec-11eb-8df4-455752de77b6.png)
 
 - 동일 시나리오 재배포
 
