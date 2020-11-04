@@ -36,6 +36,7 @@ http localhost:8084/orders branchId=1 sauceId=1 qty=10 price=10000
 - delivery 서비스 down
 
 - 구매주문 정상 실행
+
 ![image](https://user-images.githubusercontent.com/69283682/97561062-ecdc4180-1a22-11eb-809e-3300e63c0ef2.png)
 
 - 서비스 다운되어 있어서 delivery 서비스 조회 시 에러 발생
