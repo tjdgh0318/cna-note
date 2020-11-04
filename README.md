@@ -79,7 +79,8 @@ http localhost:8086/deliveries
 
 ![image](https://user-images.githubusercontent.com/69283682/97561273-40e72600-1a23-11eb-8770-1e6e58cdc94a.png)
 
-### CQRS
+### CQRS (Command and Query Responsibility Segregation) : 명령 및 쿼리 역할 구분
+
 - dashboard 통해 복수개의 서비스 이벤트 현황을 조회 : Multiple Event Source
 
 - dashboard에서 paid, delivery 정보 view 구현
