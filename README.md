@@ -104,6 +104,7 @@ http localhost:8086/deliveries
 ![image](https://user-images.githubusercontent.com/69283682/97562752-7db41c80-1a25-11eb-849b-f154bb53043e.png)
 
 - pod가 정상적으로 올라간 것 확인
+![image](https://user-images.githubusercontent.com/69283682/98061415-2c75b400-1e8f-11eb-8010-e2530d08d500.png)
 
 ## 동기식 호출 / 서킷 브레이킹 / 장애격리
 - 서킷 브레이킹 프레임워크의 선택: Spring FeignClient + Hystrix 옵션을 사용하여 구현
