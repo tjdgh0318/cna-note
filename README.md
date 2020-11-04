@@ -8,9 +8,9 @@ SAGA : 각 트랜잭션이 단일 서비스 내의 데이터를 갱신하는 일
 
 SAGA 패턴 구현 방식
 - Event/Chreography : 각 로컬트랜잭션이 이벤트를 발생시키고 다른 서비스가 트리거링 하는 방식
-- Command/Orchestration : 오케스트레이터가 어떤 트랜잭션을 수행할지 알려주는 
+- Command/Orchestration : 오케스트레이터가 어떤 트랜잭션을 수행할지 알려주는 방식
 
-### DDD 의 적용
+### DDD (Domain-Driven Design) 적용
 
 - 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity로 선언 (예: Order)
 
