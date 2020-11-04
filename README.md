@@ -227,6 +227,10 @@ kubectl get hpa
 
 ![image](https://user-images.githubusercontent.com/69283682/97957608-eb2dc780-1dee-11eb-9174-748bae1479a6.png)
 
+- readiness 설정
+
+![image](https://user-images.githubusercontent.com/69283682/97956520-3e524b00-1dec-11eb-8df4-455752de77b6.png)
+
 - 부하발생
 
 ```
@@ -234,15 +238,6 @@ siege -c1 -t120S -r5 -v --content-type "application/json" 'http://gateway:8080/o
 ```
 
 ![image](https://user-images.githubusercontent.com/69283682/97956128-3940cc00-1deb-11eb-935f-cb5ffaae8e0b.png)
-
-
-- readiness 설정
-
-![image](https://user-images.githubusercontent.com/69283682/97956520-3e524b00-1dec-11eb-8df4-455752de77b6.png)
-
-- autoscaler나 CB 설정 제거
-
-seige로 배포작업 직전에 워크로드 모니터링
 
 - 새 버전으로 배포 시작
 
