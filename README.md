@@ -93,7 +93,7 @@ http localhost:8086/deliveries
 
 ## API Gateway
 
-API Gateway를 통해 진입점 통일
+API Gateway를 통해 진입점 통일. 라우팅 설정을 위해 yaml 파일 수정
 
 - applications.yml
 
