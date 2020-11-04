@@ -180,12 +180,14 @@ readiness probe 설정
 ![image](https://user-images.githubusercontent.com/69283682/98051489-5de28580-1e77-11eb-9940-01ebbc2d8bc5.png)
 ![image](https://user-images.githubusercontent.com/69283682/98053385-cd5a7400-1e7b-11eb-9900-8c4ddbdd2e56.png)
 ![image](https://user-images.githubusercontent.com/69283682/98055184-3a700880-1e80-11eb-9f31-7491e9cc95bd.png)
+![image](https://user-images.githubusercontent.com/69283682/98057601-039cf100-1e86-11eb-8116-cd128c9e35f7.png)
 
 readiness 부하테스트
 ![image](https://user-images.githubusercontent.com/69283682/98052156-cc741300-1e78-11eb-816b-3749042a4dd7.png)
 
 readiness. 배포. 부하테스트
 ![image](https://user-images.githubusercontent.com/69283682/98054719-152eca80-1e7f-11eb-8c22-dcba6d42500b.png)
+![image](https://user-images.githubusercontent.com/69283682/98057564-e831e600-1e85-11eb-84b7-61642a245f24.png)
 
 readiness 부하테스트
 siege -c1 -t2M -r1 -v --content-type "application/json" 'http://gateway:8080/orders POST {"brancdId":"1","sauceId":"1","qty":10,"price":10000}'
