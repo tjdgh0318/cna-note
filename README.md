@@ -121,13 +121,13 @@ http localhost:8086/deliveries
 # 8. configMap
 - 컨피그맵은 키-값 쌍으로 기밀이 아닌 데이터를 저장하는 데 사용하는 API 오브젝트이다.파드는 볼륨에서 환경 변수, 커맨드-라인 인수 또는 구성 파일로 컨피그맵을 사용
 
--- 컨피그맵을 사용하면 컨테이너 이미지에서 환경별 구성을 분리하여 애플리케이션을 쉽게 이식 가능
+- 컨피그맵을 사용하면 컨테이너 이미지에서 환경별 구성을 분리하여 애플리케이션을 쉽게 이식 가능
 
--- 사용 동기 : 애플리케이션 코드와 별도로 구성 데이터를 설정하려면 컨피그맵을 사용
+- 사용 동기 : 애플리케이션 코드와 별도로 구성 데이터를 설정하려면 컨피그맵을 사용
 
--- 예를들어, 자신의 컴퓨터(개발용)와 클라우드(실제 트래픽 처리)에서 실행할 수 있는 애플리케이션을 개발한다고 가정해보자. DATABASE_HOST라는 환경 변수를 찾기 위해 코드를 작성한다. 로컬에서는 해당 변수를 localhost로 설정한다. 클라우드에서는 데이터베이스 컴포넌트를 클러스터에 노출하는 쿠버네티스 서비스를 참조하도록 설정한다.
+- 예를들어, 자신의 컴퓨터(개발용)와 클라우드(실제 트래픽 처리)에서 실행할 수 있는 애플리케이션을 개발한다고 가정해보자. DATABASE_HOST라는 환경 변수를 찾기 위해 코드를 작성한다. 로컬에서는 해당 변수를 localhost로 설정한다. 클라우드에서는 데이터베이스 컴포넌트를 클러스터에 노출하는 쿠버네티스 서비스를 참조하도록 설정한다.
 
--- 이를 통해 클라우드에서 실행 중인 컨테이너 이미지를 가져와 필요한 경우 정확히 동일한 코드를 로컬에서 디버깅할 수 있다.
+- 이를 통해 클라우드에서 실행 중인 컨테이너 이미지를 가져와 필요한 경우 정확히 동일한 코드를 로컬에서 디버깅할 수 있다.
 
 link: https://kubernetes.io/ko/docs/concepts/configuration/configmap/
 
@@ -136,75 +136,118 @@ link: https://kubernetes.io/ko/docs/concepts/configuration/configmap/
 참조 link: https://woowabros.github.io/experience/2019/05/29/feign.html
 
 - configmap 설치 (yaml)
+
 ![image](https://user-images.githubusercontent.com/69283682/97563002-d1266a80-1a25-11eb-8117-80c9c1390211.png)
 
 - application.yml
+
 ![image](https://user-images.githubusercontent.com/69283682/97563435-6295dc80-1a26-11eb-836f-8cf5a2e86b67.png)
 
 - deployment.yml
+
 ![image](https://user-images.githubusercontent.com/69283682/97563694-c15b5600-1a26-11eb-9810-539fe289d2fa.png)
 
 - PaymentService.java
+
 ![image](https://user-images.githubusercontent.com/69283682/97563880-11d2b380-1a27-11eb-823b-5d689377c321.png)
 
 # 9. HPA (Horizontal Pod Autoscaler)
+
 - AutoScale
+
 결제서비스에 대한 replica 를 동적으로 늘려주도록 설정(CPU 사용량이 15프로를 넘어서면 replica 를 10개까지 증가)
+
+```
 kubectl autoscale deploy payment --min=1 --max=10 --cpu-percent=15
+```
+
 ![image](https://user-images.githubusercontent.com/69283682/97790615-50c25e00-1c0d-11eb-85fe-9ffb20600c71.png)
 
 - siege 로그인
+
+```
 kubectl exec -it siege --container siege -- /bin/bash
+```
 
 - 부하발생
+
+```
 siege -c1 -t10S -r5 -v --content-type "application/json" 'http://gateway:8080/orders POST {"branchId":"1","sauceId":"1", "qty":10, "price":10000}'
+```
+
 ![image](https://user-images.githubusercontent.com/69283682/97793969-c42c9580-1c36-11eb-9767-c7f04eabdd6e.png)
 
 - 로그 시작
+
 ![image](https://user-images.githubusercontent.com/69283682/97844200-f40a9480-1d2d-11eb-84a9-da09333bf375.png)
 
-- 로그 후반
+- 로그 종료
+
 ![image](https://user-images.githubusercontent.com/69283682/97844119-ce7d8b00-1d2d-11eb-9cff-02566cab726b.png)
 
 - 부하발생 체크 - 오토스케일이 어떻게 되고 있는지 모니터링
+
 ![image](https://user-images.githubusercontent.com/69283682/97845029-5dd76e00-1d2f-11eb-8a3d-3f2abd77eb3d.png)
 
 # 10. liveness
-- delivery > deployment.yml 원본
+
+- delivery 서비스의 deployment.yml 원본
+
 ![image](https://user-images.githubusercontent.com/69283682/97844680-cbcf6580-1d2e-11eb-8743-3290db4f4bce.png)
 
 - liveness 모니터링
+
 ![image](https://user-images.githubusercontent.com/69283682/97845655-2e753100-1d30-11eb-8634-3b56cda3eb5e.png)ㅣ
 
 # 11. Polyglot
+
 polyglot persitency
-- order 등 h2 사용
+
+- order 등 대부분의 서비스는 h2 사용
+
 ![image](https://user-images.githubusercontent.com/69283682/97567886-311f1000-1a2a-11eb-9878-3b854f9b09e0.png)
 
-- delivery는 hsql
+- delivery는 hsql 적용
+
 ![image](https://user-images.githubusercontent.com/69283682/97567350-0e8cf700-1a2a-11eb-92d7-7f6ee3110255.png)
 
 # 12. 무정지 재배포
+
 - hpa 제거
+
+```
 kubectl delete hpa payment
+```
 
 - hpa 제거 확인
+
+```
 kubectl get hpa
+```
+
 ![image](https://user-images.githubusercontent.com/69283682/97957608-eb2dc780-1dee-11eb-9174-748bae1479a6.png)
 
 - 부하발생
+
+```
 siege -c1 -t120S -r5 -v --content-type "application/json" 'http://gateway:8080/orders POST {"brancdId":"1","sauceId":"1","qty":10,"price":10000}'
+```
+
 ![image](https://user-images.githubusercontent.com/69283682/97956128-3940cc00-1deb-11eb-935f-cb5ffaae8e0b.png)
 
+
 - readiness 설정
+
 ![image](https://user-images.githubusercontent.com/69283682/97956520-3e524b00-1dec-11eb-8df4-455752de77b6.png)
 
 - autoscaler나 CB 설정 제거
+
 seige로 배포작업 직전에 워크로드 모니터링
 
 - 새 버전으로 배포 시작
 
 - seige 부하 결과 100% 미만
+
 ![image](https://user-images.githubusercontent.com/69283682/97962714-16b5af80-1df9-11eb-8303-de1fdc66416c.png)
 
 - readiness probe 설정
