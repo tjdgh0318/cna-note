@@ -81,7 +81,7 @@ http localhost:8086/deliveries
 
 ### CQRS (Command and Query Responsibility Segregation) : 명령 및 쿼리 역할 구분
 
-- dashboard 통해 복수개의 서비스 이벤트 현황을 조회 : Multiple Event Source
+- dashboard 통해 복수개의 서비스 이벤트 현황을 통합 조회 : Multiple Event Source
 
 - dashboard에서 paid, delivery 정보 view 구현
 
