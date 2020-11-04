@@ -70,20 +70,104 @@ http localhost:8086/deliveries
 ![image](https://user-images.githubusercontent.com/69283682/97561273-40e72600-1a23-11eb-8770-1e6e58cdc94a.png)
 
 # 4. CQRS
-- dashboard 통해 복수개의 서비스 현황을 조회
+- dashboard 통해 복수개의 서비스 이벤트 현황을 조회 : Multiple Event Source
 
 - dashboard에서 paid, delivery 정보 view 구현
+
 ![image](https://user-images.githubusercontent.com/69283682/97561906-31b4a800-1a24-11eb-9bc3-178666142348.png)
 
 - dashboard 조회 결과
+
 ![image](https://user-images.githubusercontent.com/69283682/97562008-57da4800-1a24-11eb-91d7-ab0a8a80abd0.png)
 
-# 5. Gateway
+# 5. API Gateway
+
+API Gateway를 통해 진입점 통일
+
+- applications.yml
+
+```
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: order
+          uri: http://localhost:8084
+          predicates:
+            - Path=/orders/** 
+        - id: payment
+          uri: http://localhost:8085
+          predicates:
+            - Path=/payments/** 
+        - id: delivery
+          uri: http://localhost:8086
+          predicates:
+            - Path=/deliveries/** 
+        - id: orderDashboard
+          uri: http://localhost:8087
+          predicates:
+            - Path= /orderDashboards/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: order
+          uri: http://order:8080
+          predicates:
+            - Path=/orders/** 
+        - id: payment
+          uri: http://payment:8080
+          predicates:
+            - Path=/payments/** 
+        - id: delivery
+          uri: http://delivery:8080
+          predicates:
+            - Path=/deliveries/** 
+        - id: orderDashboard
+          uri: http://orderDashboard:8080
+          predicates:
+            - Path= /orderDashboards/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
+```
 
 - 8088로 dash 조회
+
 ![image](https://user-images.githubusercontent.com/69283682/97562218-9e2fa700-1a24-11eb-8306-36f435499814.png)
 
 - 8088로 payment 조회
+
 ![image](https://user-images.githubusercontent.com/69283682/97562314-c4554700-1a24-11eb-82d7-675d2da0bda7.png)
 
 # 운영
