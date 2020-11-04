@@ -233,17 +233,11 @@ kubectl get hpa
 siege -c30 -t2M -r5 -v --content-type application/json http://gateway:8080/orders POST {"brancdId":"1","sauceId":"1","qty":10,"price":10000}
 ```
 
-![image](https://user-images.githubusercontent.com/69283682/97956128-3940cc00-1deb-11eb-935f-cb5ffaae8e0b.png)
-
 - 새 버전으로 배포 시작
 
 - seige 부하 결과 100% 미만
 
 ![image](https://user-images.githubusercontent.com/69283682/98064621-0e5f8200-1e96-11eb-850e-70b19d006263.png)
-
-![image](https://user-images.githubusercontent.com/69283682/98064415-9beea200-1e95-11eb-8620-bee24d3372b3.png)
-
-![image](https://user-images.githubusercontent.com/69283682/97962714-16b5af80-1df9-11eb-8303-de1fdc66416c.png)
 
 - readiness probe 설정
 
@@ -254,13 +248,3 @@ siege -c30 -t2M -r5 -v --content-type application/json http://gateway:8080/order
 - readiness 부하테스트
 
 ![image](https://user-images.githubusercontent.com/69283682/98064320-60ec6e80-1e95-11eb-880b-ae7bc1575b1a.png)
-
-- readiness. 배포. 부하테스트
-
-![image](https://user-images.githubusercontent.com/69283682/98054719-152eca80-1e7f-11eb-8c22-dcba6d42500b.png)
-
-![image](https://user-images.githubusercontent.com/69283682/98057564-e831e600-1e85-11eb-84b7-61642a245f24.png)
-
-- readiness 부하테스트
-siege -c1 -t2M -r1 -v --content-type "application/json" 'http://gateway:8080/orders POST {"brancdId":"1","sauceId":"1","qty":10,"price":10000}'
-![image](https://user-images.githubusercontent.com/69283682/98052416-85d2e880-1e79-11eb-9634-788f04b21fe4.png)
