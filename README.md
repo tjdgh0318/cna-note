@@ -1,6 +1,6 @@
-# cna-note
+# 구현
 
-## DDD 의 적용
+### DDD 의 적용
 
 - 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity로 선언 (예: Order)
 
@@ -31,7 +31,7 @@ http localhost:8084/orders branchId=1 sauceId=1 qty=10 price=10000
 
 ![image](https://user-images.githubusercontent.com/69283682/97559248-87875100-1a20-11eb-9e92-f7bd19be6969.png)
 
-# 3. 비동기 호출 / 시간적 디커플링 / 장애격리 / 최종(Eventual) 일관성 테스트
+### 비동기 호출 / 시간적 디커플링 / 장애격리 / 최종(Eventual) 일관성 테스트
 
 - 주문/결제가 이루어진 후에 delivery 시스템으로 이를 알려주는 행위는 비 동기식으로 처리하여 시스템이 주문 이후 처리를 위하여 결제 주문이 블로킹 되지 않도록 처리
 
@@ -69,7 +69,7 @@ http localhost:8086/deliveries
 
 ![image](https://user-images.githubusercontent.com/69283682/97561273-40e72600-1a23-11eb-8770-1e6e58cdc94a.png)
 
-# 4. CQRS
+### CQRS
 - dashboard 통해 복수개의 서비스 이벤트 현황을 조회 : Multiple Event Source
 
 - dashboard에서 paid, delivery 정보 view 구현
@@ -80,7 +80,7 @@ http localhost:8086/deliveries
 
 ![image](https://user-images.githubusercontent.com/69283682/97562008-57da4800-1a24-11eb-91d7-ab0a8a80abd0.png)
 
-# 5. API Gateway
+### API Gateway
 
 API Gateway를 통해 진입점 통일
 
@@ -174,12 +174,12 @@ server:
 
 각 서비스들은 각자의 source repository에 구성되었고 CI/CD 플랫폼은 Azure 활용
 
-## 6. CI
+### CI
 - devops 활용하여 각 서비스 Pipeline 구성 및 Trigger 통한 자동화
 
 ![image](https://user-images.githubusercontent.com/69283682/97562511-14340e00-1a25-11eb-9f8a-f053d8b5020d.png)
 
-## 7. CD
+### CD
 - devops 활용하여 각 서비스 Release 구성 및 Trigger 통한 자동화
 
 ![image](https://user-images.githubusercontent.com/69283682/97562673-5c533080-1a25-11eb-89d8-3ffede6c309c.png)
@@ -192,7 +192,7 @@ server:
 
 ![image](https://user-images.githubusercontent.com/69283682/98061415-2c75b400-1e8f-11eb-8010-e2530d08d500.png)
 
-## 동기식 호출 / 서킷 브레이킹 / 장애격리
+### 동기식 호출 / 서킷 브레이킹 / 장애격리
 - 서킷 브레이킹 프레임워크의 선택: Spring FeignClient + Hystrix 옵션을 사용하여 구현
 
 - 주문(order)-->결제(payment) 시의 연결을 RESTful Request/Response 로 연동하여 구현이 되어있고, 결제 요청이 과도할 경우 CB 를 통하여 장애격리
@@ -203,8 +203,7 @@ server:
 - 피호출 서비스(결제:payment) 의 임의 부하 처리 - 400 밀리에서 증감 300 밀리 정도 왔다갔다 하게
 ![image](https://user-images.githubusercontent.com/69283682/97959785-6f824980-1df3-11eb-96f5-ae05a898294d.png)
 
-
-# 8. configMap
+### configMap
 - 컨피그맵은 키-값 쌍으로 기밀이 아닌 데이터를 저장하는 데 사용하는 API 오브젝트이다.파드는 볼륨에서 환경 변수, 커맨드-라인 인수 또는 구성 파일로 컨피그맵을 사용
 
 - 컨피그맵을 사용하면 컨테이너 이미지에서 환경별 구성을 분리하여 애플리케이션을 쉽게 이식 가능
@@ -237,7 +236,7 @@ link: https://kubernetes.io/ko/docs/concepts/configuration/configmap/
 
 ![image](https://user-images.githubusercontent.com/69283682/97563880-11d2b380-1a27-11eb-823b-5d689377c321.png)
 
-# 9. HPA (Horizontal Pod Autoscaler)
+### HPA (Horizontal Pod Autoscaler)
 
 - AutoScale
 
@@ -275,7 +274,7 @@ siege -c1 -t10S -r5 -v --content-type "application/json" 'http://gateway:8080/or
 
 ![image](https://user-images.githubusercontent.com/69283682/97845029-5dd76e00-1d2f-11eb-8a3d-3f2abd77eb3d.png)
 
-# 10. liveness
+### liveness
 
 - delivery 서비스의 deployment.yml 원본
 
@@ -285,7 +284,7 @@ siege -c1 -t10S -r5 -v --content-type "application/json" 'http://gateway:8080/or
 
 ![image](https://user-images.githubusercontent.com/69283682/97845655-2e753100-1d30-11eb-8634-3b56cda3eb5e.png)ㅣ
 
-# 11. Polyglot
+### Polyglot
 
 polyglot persitency
 
@@ -297,7 +296,7 @@ polyglot persitency
 
 ![image](https://user-images.githubusercontent.com/69283682/97567350-0e8cf700-1a2a-11eb-92d7-7f6ee3110255.png)
 
-# 12. 무정지 재배포
+### 무정지 재배포
 
 - hpa 제거
 
