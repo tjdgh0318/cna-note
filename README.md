@@ -1,6 +1,6 @@
 # cna-note
 
-# 1. DDD 의 적용
+## DDD 의 적용
 
 - 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity로 선언 (예: Order)
 
@@ -16,7 +16,7 @@
 http localhost:8084/orders branchId=1 sauceId=1 qty=10 price=10000
 ```
 
-# 2. 동기식 호출
+### 동기식 호출
 
 - 주문 → 결제 (order → payment) 간 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리
 - 주문을 받은 직후(@PostPersist) 결제를 요청하도록 처리
