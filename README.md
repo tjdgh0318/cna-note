@@ -11,43 +11,62 @@
 ![image](https://user-images.githubusercontent.com/69283682/97958566-cc303500-1df0-11eb-8f79-303af9e2ddec.png)
 
 - 적용 후 REST API 테스트
+
 ```
 http localhost:8084/orders branchId=1 sauceId=1 qty=10 price=10000
 ```
+
 # 2. 동기식 호출
 
 - 주문 → 결제 (order → payment) 간 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리
 - 주문을 받은 직후(@PostPersist) 결제를 요청하도록 처리
+
 ![image](https://user-images.githubusercontent.com/69283682/97558818-fadc9300-1a1f-11eb-8585-2bb964977187.png)
 
 - 동기식 설정에 따라 payment 서비스 중단시 500 에러 발생
+
 ![image](https://user-images.githubusercontent.com/69283682/97559049-48f19680-1a20-11eb-8ce6-b4e2d6fe91c2.png)
 
 - payment 서비스 정상 작동시 정상 결과 출력
+
 ![image](https://user-images.githubusercontent.com/69283682/97559248-87875100-1a20-11eb-9e92-f7bd19be6969.png)
 
-# 3. 비동기 호출
-- order > delivery비동기식 구현
-- 결제가 이루어진 후에 delivery 시스템으로 이를 알려주는 행위는 비 동기식으로 처리하여 시스템이 주문 처리를 위하여 결제 주문이 블로킹 되지 않도록 처리한다
+# 3. 비동기 호출 / 시간적 디커플링 / 장애격리 / 최종(Eventual) 일관성 테스트
 
-- Payment 서비스에서는 결제 이력에 기록을 남긴 후 곧바로 결제승인이 되었다는 에빈트를 카프카 송출
+- 주문/결제가 이루어진 후에 delivery 시스템으로 이를 알려주는 행위는 비 동기식으로 처리하여 시스템이 주문 이후 처리를 위하여 결제 주문이 블로킹 되지 않도록 처리
+
+- Payment 서비스에서는 결제 이력에 기록을 남긴 후 곧바로 결제승인이 되었다는 이벤트를 카프카 송출
 ![image](https://user-images.githubusercontent.com/69283682/97959189-24b40200-1df2-11eb-8fb4-57b6fdb9ac86.png)
 
-- Delivery  서비스에서는 결제 승인 이벤트에 대해서 이를 수신하여 자신의 정책을 처리하도록 PolicyHandler 구현
+- Delivery 서비스에서는 결제 승인 이벤트에 대해서 이를 수신하여 자신의 정책을 처리하도록 PolicyHandler 구현
 ![image](https://user-images.githubusercontent.com/69283682/97560098-9c181900-1a21-11eb-8eca-1d71886c5f13.png)
 
-- delivery 서비스 down
+- delivery 서비스 down : 비동기 서비스의 주문/결제 서비스 영향 파악을 위해 서비스 down
 
-- 구매주문 정상 실행
+- 구매주문 실행 : 정상 확인
+
+```
+http localhost:8084/orders branchId=1 sauceId=1 qty=10 price=10000
+```
 
 ![image](https://user-images.githubusercontent.com/69283682/97561062-ecdc4180-1a22-11eb-809e-3300e63c0ef2.png)
 
 - 서비스 다운되어 있어서 delivery 서비스 조회 시 에러 발생
+
+```
+http localhost:8086/deliveries
+```
+
 ![image](https://user-images.githubusercontent.com/69283682/97561168-11381e00-1a23-11eb-956e-5962ed45d9ac.png)
 
 - delivery 서비스 시작
 
 - delivery 서비스 조회 시 정상 확인
+
+```
+http localhost:8086/deliveries
+```
+
 ![image](https://user-images.githubusercontent.com/69283682/97561273-40e72600-1a23-11eb-8770-1e6e58cdc94a.png)
 
 # 4. CQRS
@@ -67,7 +86,26 @@ http localhost:8084/orders branchId=1 sauceId=1 qty=10 price=10000
 - 8088로 payment 조회
 ![image](https://user-images.githubusercontent.com/69283682/97562314-c4554700-1a24-11eb-82d7-675d2da0bda7.png)
 
-# 운영 / 동기식 호출 / 서킷 브레이킹 / 장애격리
+# 운영
+
+각 서비스들은 각자의 source repository에 구성되었고 CI/CD 플랫폼은 Azure 활용
+
+## 6. CI
+- devops 활용하여 각 서비스 Pipeline 구성 및 Trigger 통한 자동화
+
+![image](https://user-images.githubusercontent.com/69283682/97562511-14340e00-1a25-11eb-9f8a-f053d8b5020d.png)
+
+## 7. CD
+- devops 활용하여 각 서비스 Release 구성 및 Trigger 통한 자동화
+
+![image](https://user-images.githubusercontent.com/69283682/97562673-5c533080-1a25-11eb-89d8-3ffede6c309c.png)
+
+- 배포 시 kubernetes 폴더의 yaml 파일 (deployment, service) 사용하도록 설정
+![image](https://user-images.githubusercontent.com/69283682/97562752-7db41c80-1a25-11eb-849b-f154bb53043e.png)
+
+- pod가 정상적으로 올라간 것 확인
+
+## 동기식 호출 / 서킷 브레이킹 / 장애격리
 - 서킷 브레이킹 프레임워크의 선택: Spring FeignClient + Hystrix 옵션을 사용하여 구현
 
 - 주문(order)-->결제(payment) 시의 연결을 RESTful Request/Response 로 연동하여 구현이 되어있고, 결제 요청이 과도할 경우 CB 를 통하여 장애격리
@@ -78,16 +116,6 @@ http localhost:8084/orders branchId=1 sauceId=1 qty=10 price=10000
 - 피호출 서비스(결제:payment) 의 임의 부하 처리 - 400 밀리에서 증감 300 밀리 정도 왔다갔다 하게
 ![image](https://user-images.githubusercontent.com/69283682/97959785-6f824980-1df3-11eb-96f5-ae05a898294d.png)
 
-# 6. CI
-- 각 서비스를 Pipeline 등록
-![image](https://user-images.githubusercontent.com/69283682/97562511-14340e00-1a25-11eb-9f8a-f053d8b5020d.png)
-
-# 7. CD
-- 각 서비스 CD (Release) 등록
-![image](https://user-images.githubusercontent.com/69283682/97562673-5c533080-1a25-11eb-89d8-3ffede6c309c.png)
-
-- kubectl 설정
-![image](https://user-images.githubusercontent.com/69283682/97562752-7db41c80-1a25-11eb-849b-f154bb53043e.png)
 
 # 8. configMap
 - 컨피그맵은 키-값 쌍으로 기밀이 아닌 데이터를 저장하는 데 사용하는 API 오브젝트이다.파드는 볼륨에서 환경 변수, 커맨드-라인 인수 또는 구성 파일로 컨피그맵을 사용할 수 있다.
