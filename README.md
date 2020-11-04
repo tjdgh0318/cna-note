@@ -26,21 +26,6 @@ SAGA 패턴 구현 방식
 http localhost:8084/orders branchId=1 sauceId=1 qty=10 price=10000
 ```
 
-### 동기식 호출
-
-- 주문 → 결제 (order → payment) 간 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리
-- 주문을 받은 직후(@PostPersist) 결제를 요청하도록 처리
-
-![image](https://user-images.githubusercontent.com/69283682/97558818-fadc9300-1a1f-11eb-8585-2bb964977187.png)
-
-- 동기식 설정에 따라 payment 서비스 중단시 500 에러 발생
-
-![image](https://user-images.githubusercontent.com/69283682/97559049-48f19680-1a20-11eb-8ce6-b4e2d6fe91c2.png)
-
-- payment 서비스 정상 작동시 정상 결과 출력
-
-![image](https://user-images.githubusercontent.com/69283682/97559248-87875100-1a20-11eb-9e92-f7bd19be6969.png)
-
 ### 비동기 호출 / 시간적 디커플링 / 장애격리 / 최종(Eventual) 일관성 테스트
 
 - 주문/결제가 이루어진 후에 delivery 시스템으로 이를 알려주는 행위는 비 동기식으로 처리하여 시스템이 주문 이후 처리를 위하여 결제 주문이 블로킹 되지 않도록 처리
@@ -78,6 +63,21 @@ http localhost:8086/deliveries
 ```
 
 ![image](https://user-images.githubusercontent.com/69283682/97561273-40e72600-1a23-11eb-8770-1e6e58cdc94a.png)
+
+### 동기식 호출
+
+- 주문 → 결제 (order → payment) 간 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리
+- 주문을 받은 직후(@PostPersist) 결제를 요청하도록 처리
+
+![image](https://user-images.githubusercontent.com/69283682/97558818-fadc9300-1a1f-11eb-8585-2bb964977187.png)
+
+- 동기식 설정에 따라 payment 서비스 중단시 500 에러 발생
+
+![image](https://user-images.githubusercontent.com/69283682/97559049-48f19680-1a20-11eb-8ce6-b4e2d6fe91c2.png)
+
+- payment 서비스 정상 작동시 정상 결과 출력
+
+![image](https://user-images.githubusercontent.com/69283682/97559248-87875100-1a20-11eb-9e92-f7bd19be6969.png)
 
 ## CQRS (Command and Query Responsibility Segregation) : 명령 및 쿼리 역할 구분
 
